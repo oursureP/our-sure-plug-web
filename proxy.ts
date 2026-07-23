@@ -4,7 +4,7 @@ import { TOKEN_KEY } from "./app/lib/auth-cookies";
 // Routes that require authentication
 const PROTECTED_PREFIXES = ["/dashboard", "/portal"];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get(TOKEN_KEY)?.value;
 
