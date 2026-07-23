@@ -29,7 +29,7 @@ export function EditUserModal({
     lastName: user.lastName ?? "",
     phone: user.phone ?? "",
     gender: user.gender ?? "",
-    departmentId: user.department?.id ?? "",
+    departmentId: user.departments?.[0]?.id ?? "",
   });
 
   const update = (k: keyof typeof form, v: string) =>
