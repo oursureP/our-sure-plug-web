@@ -76,9 +76,9 @@ export function Footer() {
               <div className="flex h-20 w-20 items-center justify-center rounded-lg ">
                 <img src="/images/logo.png" alt="logo" />
               </div>
-              <span className="text-[15px] font-bold text-foreground mb-3.5 -ml-3">
+              {/* <span className="text-[15px] font-bold text-foreground mb-3.5 -ml-3">
                 Our<span className="text-primary">Sure</span>Plug
-              </span>
+              </span> */}
             </Link>
             <p className="mb-5 max-w-xs text-[13.5px] leading-relaxed text-muted-foreground">
               A modern digital agency delivering web, AI, and growth-driven

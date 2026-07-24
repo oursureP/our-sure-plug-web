@@ -53,7 +53,7 @@ export function TrustStrip() {
                 alt={`Brand ${i + 1}`}
                 width={100}
                 height={70}
-                className="whitespace-nowrap text-[19px] font-bold tracking-tight text-foreground/75  transition-all duration-300 hover:text-primary hover:scale-105"
+                className="whitespace-nowrap text-[19px] w-auto h-auto font-bold tracking-tight text-foreground/75  transition-all duration-300 hover:text-primary hover:scale-105"
               />
             ))}
           </div>

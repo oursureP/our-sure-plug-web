@@ -47,7 +47,7 @@ export function Sidebar({
 
       <aside
         className={cn(
-          "fixed left-0 top-0 z-50 flex h-screen flex-col border-r border-primary bg-primary/15 transition-all duration-300 ",
+          "fixed left-0 top-0 z-50 flex h-screen flex-col border-r border-primary bg-primary transition-all duration-300 ",
           collapsed ? "w-18" : "w-64",
           open ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}>
@@ -64,7 +64,7 @@ export function Sidebar({
             </div>
             {!collapsed && (
               <span className="text-[14px] font-bold tracking-tight text-foreground">
-                Our<span className="text-primary">Sure</span>Plug
+                Our<span className="text-secondary">Sure</span>Plug
               </span>
             )}
           </Link>
@@ -119,8 +119,8 @@ export function Sidebar({
                       "flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13.5px] font-medium transition-colors",
                       collapsed && "justify-center px-0",
                       active
-                        ? "bg-primary/12 text-primary"
-                        : "text-foreground hover:bg-foreground/4 hover:text-foreground",
+                        ? "bg-secondary tex-secondary"
+                        : "text-white dark:text-black hover:bg-secondary/20 hover:text-secondary",
                     )}>
                     <item.icon size={18} className="shrink-0" />
                     {!collapsed && item.label}
@@ -136,21 +136,21 @@ export function Sidebar({
           {!collapsed ? (
             <>
               <div className="mb-2 flex items-center gap-3 rounded-lg px-3 py-2">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-[12px] font-bold text-primary-foreground">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-secondary text-[12px] font-bold text-foreground">
                   {user ? `${user.firstName[0]}${user.lastName[0]}` : "U"}
                 </div>
                 <div className="min-w-0">
-                  <div className="truncate text-[13px] font-semibold text-foreground">
+                  <div className="truncate text-[13px] font-semibold text-white dark:text-black">
                     {user ? `${user.firstName} ${user.lastName}` : "User"}
                   </div>
-                  <div className="truncate text-[11.5px] capitalize text-muted-foreground">
+                  <div className="truncate text-[11.5px] capitalize text-secondary">
                     {user?.role.toLowerCase().replace(/_/g, " ")}
                   </div>
                 </div>
               </div>
               <button
                 onClick={handleLogout}
-                className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-[13.5px] font-medium text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive">
+                className="flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-[13.5px] font-medium text-secondary transition-colors hover:bg-destructive hover:text-white">
                 <LogOut size={18} /> Sign Out
               </button>
             </>

@@ -13,9 +13,9 @@ export default async function WebLayout({
   });
   const categories = (services ?? []).filter((s) => s.isActive).slice(0, 6);
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen bg-background overflow-hidden">
       <Navbar categories={categories} />
-      <main className="grow">{children}</main>
+      <main className="grow w-full">{children}</main>
       <Footer />
     </div>
   );
