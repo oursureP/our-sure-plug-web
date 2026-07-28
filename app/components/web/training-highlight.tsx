@@ -64,7 +64,7 @@ export function TrainingHighlight({ list }: { list?: Course[] }) {
             {courses.map((course) => (
               <Link
                 key={course.id}
-                href={`/courses/${course.id}`}
+                href={`/courses/${course.slug}`}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-md shadow-black/4 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/12 dark:border-white/10 dark:bg-[#161427] dark:shadow-none">
                 {/* Thumbnail */}
                 <div className="relative h-44 overflow-hidden bg-muted">

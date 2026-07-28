@@ -6,14 +6,14 @@ import { CourseDetailClient } from "@/app/components/web/course-detail-client";
 export const revalidate = 300;
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { id } = await params;
-  const course = await serverFetch<Course>(`/courses/${id}`, {
+  const { slug } = await params;
+  const course = await serverFetch<Course>(`/courses/slug/${slug}`, {
     revalidate: 300,
   });
   if (!course) return { title: "Course | OurSurePlug" };
@@ -29,8 +29,8 @@ export async function generateMetadata({
 }
 
 export default async function CoursePage({ params }: PageProps) {
-  const { id } = await params;
-  const course = await serverFetch<Course>(`/courses/${id}`, {
+  const { slug } = await params;
+  const course = await serverFetch<Course>(`/courses/slug/${slug}`, {
     revalidate: 300,
   });
   return <CourseDetailClient course={course} />;

@@ -15,6 +15,7 @@ import { Course, Service } from "@/app/interfaces/lms.interface";
 import { formatNGN, formatUSD } from "@/app/lib/format";
 import { cn } from "@/lib/utils";
 import { getCourseFormat } from "@/app/lib/course-format";
+import { Reveal } from "./reveal";
 
 export function CoursesCatalog({
   courses,
@@ -31,7 +32,7 @@ export function CoursesCatalog({
   const filtered = useMemo(() => {
     return courses.filter((c) => {
       const matchesService =
-        activeService === "ALL" || c.serviceId === activeService;
+        activeService === "ALL" || c.service?.slug === activeService;
       const matchesFormat = format === "ALL" || getCourseFormat(c) === format;
       return matchesService && matchesFormat;
     });
@@ -42,9 +43,37 @@ export function CoursesCatalog({
   );
 
   return (
-    <div className="bg-background pt-28 pb-20 lg:pt-32 lg:pb-28">
-      <div className="mx-auto max-w-6xl px-5">
-        <div className="max-w-2xl">
+    <div className="bg-background pb-20 lg:pb-28">
+      <section className="relative flex min-h-[500px] items-center justify-center overflow-hidden md:min-h-[520px]">
+        <Image
+          src="/images/courses-hero.jpeg"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(67,11,131,0.80) 0%, rgba(67,11,131,0.65) 50%, rgba(67,11,131,0.90) 100%)",
+          }}
+        />
+        <div className="relative z-10 mx-auto max-w-3xl px-5 pt-20 text-center">
+          <p className="text-[13px] font-bold uppercase tracking-wider text-[var(--brand-green)]">
+            Our courses
+          </p>
+          <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-white md:text-5xl">
+            Pick a course and enroll
+          </h1>
+          <p className="mt-5 text-[15px] leading-relaxed text-white/80">
+            Learn at your own pace, or join a scheduled cohort. Open any course
+            for the full curriculum and pricing.
+          </p>
+        </div>
+      </section>
+      <div className="mx-auto max-w-6xl px-5 pt-12">
+        {/* <div className="max-w-2xl">
           <p className="text-[13px] font-bold uppercase tracking-wider text-primary">
             Our courses
           </p>
@@ -55,7 +84,7 @@ export function CoursesCatalog({
             Learn at your own pace, or join a scheduled cohort. Open any course
             for the full curriculum and pricing.
           </p>
-        </div>
+        </div> */}
 
         {/* Format filter — clear self-paced vs scheduled */}
         <div className="mt-8 flex flex-wrap gap-2">
@@ -98,10 +127,10 @@ export function CoursesCatalog({
             {servicesWithCourses.map((s) => (
               <button
                 key={s.id}
-                onClick={() => setActiveService(s.id)}
+                onClick={() => setActiveService(s.slug)}
                 className={cn(
                   "rounded-full px-4 py-2 text-[13px] font-semibold transition-colors",
-                  activeService === s.id
+                  activeService === s.slug
                     ? "bg-foreground text-background"
                     : "border border-border text-muted-foreground hover:text-foreground",
                 )}>
@@ -113,8 +142,10 @@ export function CoursesCatalog({
 
         {filtered.length > 0 ? (
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {filtered.map((course) => (
-              <CourseCard key={course.id} course={course} />
+            {filtered.map((course, i) => (
+              <Reveal key={course.id} delay={i * 80}>
+                <CourseCard course={course} />
+              </Reveal>
             ))}
           </div>
         ) : (
@@ -141,7 +172,7 @@ function CourseCard({ course }: { course: Course }) {
   const fmt = getCourseFormat(course);
   return (
     <Link
-      href={`/courses/${course.id}`}
+      href={`/courses/${course.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:shadow-none">
       <div className="relative h-44 w-full overflow-hidden bg-muted">
         {course.thumbnailUrl ? (

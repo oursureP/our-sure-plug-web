@@ -19,7 +19,6 @@ export default async function CoursesPage() {
   ]);
   const published = (courses ?? []).filter((c) => c.isPublished);
   const activeServices = (services ?? []).filter((s) => s.isActive);
-  console.log(published);
   return (
     <Suspense fallback={null}>
       <CoursesCatalog courses={published} services={activeServices} />

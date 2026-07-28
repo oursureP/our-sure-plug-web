@@ -32,6 +32,7 @@ export interface FaqItem {
 export interface Service {
   id: string;
   name: string;
+  slug: string;
   description?: string | null;
   tagline?: string | null; // ← add
   image?: string | null; // ← add
@@ -66,6 +67,7 @@ export interface ServiceCourseSummary {
 export interface Course {
   id: string;
   title: string;
+  slug: string;
   description: string;
   price: string; // Decimal → string
   duration?: string | null;
@@ -77,7 +79,7 @@ export interface Course {
   createdAt: string;
   updatedAt: string;
 
-  service?: Pick<Service, "id" | "name">;
+  service?: Pick<Service, "id" | "name" | "slug">;
   instructor?: Pick<User, "id" | "firstName" | "lastName" | "email">;
   lessons?: Lesson[];
   sessions?: CourseSession[];

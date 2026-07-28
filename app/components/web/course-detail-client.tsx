@@ -83,9 +83,9 @@ export function CourseDetailClient({ course }: { course: Course | null }) {
   const activeSessions = (course.sessions ?? []).filter((s) => s.isActive);
   const lessons = course.lessons ?? [];
   const isOnline = course.courseType === "ONLINE";
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero */}
       <section
         className="relative overflow-hidden"
         style={{ background: "var(--brand-purple)" }}>

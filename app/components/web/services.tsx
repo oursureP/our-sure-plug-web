@@ -4,61 +4,11 @@ import { ArrowRight, GraduationCap } from "lucide-react";
 import { Service } from "@/app/interfaces/lms.interface";
 import { getServiceVisual } from "@/app/lib/service-visuals";
 
-const fallbackServices: Service[] = [
-  {
-    id: "fb1",
-    name: "Web Development",
-    description:
-      "Responsive, lightning-fast websites and web apps that turn visitors into loyal customers.",
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-    _count: { courses: 4 },
-  },
-  {
-    id: "fb2",
-    name: "AI Integration",
-    description:
-      "Automate workflows and embed intelligence into your operations.",
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-    _count: { courses: 2 },
-  },
-  {
-    id: "fb3",
-    name: "Social Media Management",
-    description: "Grow your audience and drive real engagement.",
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-    _count: { courses: 3 },
-  },
-  {
-    id: "fb4",
-    name: "Digital Marketing",
-    description: "Ads, SEO and strategy that scale your reach.",
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-    _count: { courses: 3 },
-  },
-  {
-    id: "fb5",
-    name: "Graphics Design",
-    description: "Brand identity, UI design and motion that stand out.",
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-    _count: { courses: 2 },
-  },
-];
-
 export function Services({ services }: { services?: Service[] }) {
   const list =
     services && services.length > 0
       ? services.filter((s) => s.isActive).slice(0, 5)
-      : fallbackServices;
+      : [];
   // console.log("Services list:", list);
   return (
     <section className="bg-card/80 py-20 lg:py-28">
@@ -85,7 +35,7 @@ export function Services({ services }: { services?: Service[] }) {
             return (
               <Link
                 key={service.id}
-                href={`/services/${service.id}`}
+                href={`/services/${service.slug}`}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-md shadow-black/4 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/12 dark:shadow-none">
                 {/* Image */}
                 <div className="relative h-44 overflow-hidden bg-muted">

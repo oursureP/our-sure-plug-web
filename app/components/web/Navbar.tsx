@@ -63,7 +63,7 @@ export function Navbar({ categories = [] }: { categories?: Service[] }) {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ",
         scrolled
           ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
-          : "bg-card border-b border-border",
+          : "bg-card/50 ",
       )}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-17 items-center justify-between">
@@ -77,9 +77,9 @@ export function Navbar({ categories = [] }: { categories?: Service[] }) {
               alt="logo"
               className="w-20 h-15 object-cover"
             />
-            <span className="text-[15px] mb-1.25 -ml-3 font-bold tracking-tight text-foreground">
+            {/* <span className="text-[15px] mb-1.25 -ml-3 font-bold tracking-tight text-foreground">
               Our<span className="text-primary">Sure</span>Plug
-            </span>
+            </span> */}
           </Link>
 
           {/* Desktop nav */}
@@ -123,7 +123,7 @@ export function Navbar({ categories = [] }: { categories?: Service[] }) {
                           {categories.map((cat) => (
                             <Link
                               key={cat.id}
-                              href={`/courses?service=${cat.id}`}
+                              href={`/courses?service=${cat.slug}`}
                               className="group flex items-start gap-2.5 rounded-lg p-2.5 transition-colors hover:bg-primary/[0.07]">
                               <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[7px] bg-primary/10 text-primary">
                                 <GraduationCap size={15} />

@@ -51,13 +51,13 @@ export function ServiceDetailClient({ service }: { service: Service | null }) {
               aria-hidden
               className="object-cover opacity-30"
             />
-            <div
+            {/* <div
               className="absolute inset-0"
               style={{
                 background:
                   "linear-gradient(to bottom, rgba(67,11,131,0.85), rgba(67,11,131,0.95))",
               }}
-            />
+            /> */}
           </div>
         )}
         <div className="relative mx-auto max-w-4xl px-5 py-20 text-center md:py-28">
@@ -89,7 +89,7 @@ export function ServiceDetailClient({ service }: { service: Service | null }) {
             </Link>
             {courseCount > 0 && (
               <Link
-                href={`/courses?service=${service.id}`}
+                href={`/courses?service=${service.slug}`}
                 className="rounded-xl border border-white/25 bg-white/10 px-6 py-3 font-semibold text-white backdrop-blur transition hover:bg-white/20">
                 View {courseCount} course{courseCount === 1 ? "" : "s"}
               </Link>
@@ -101,7 +101,7 @@ export function ServiceDetailClient({ service }: { service: Service | null }) {
       {/* Overview */}
       {service.description && (
         <section className="bg-card">
-          <div className="mx-auto max-w-4xl px-5 py-14 md:py-16">
+          <div className="mx-auto max-w-5xl px-5 py-14 md:py-16">
             <p className="text-[11px] font-bold uppercase tracking-widest text-primary">
               Service Overview
             </p>
@@ -115,7 +115,7 @@ export function ServiceDetailClient({ service }: { service: Service | null }) {
       {/* Who it's for */}
       {service.whoItsFor && (
         <section className="bg-muted/30">
-          <div className="mx-auto max-w-4xl px-5 py-12">
+          <div className="mx-auto max-w-5xl px-5 py-12">
             <p className="text-[11px] font-bold uppercase tracking-widest text-primary">
               Who This Is For
             </p>
@@ -131,7 +131,7 @@ export function ServiceDetailClient({ service }: { service: Service | null }) {
       {/* Problems */}
       {problems.length > 0 && (
         <section className="bg-background">
-          <div className="mx-auto max-w-4xl px-5 py-14 md:py-16">
+          <div className="mx-auto max-w-5xl px-5 py-14 md:py-16">
             <p className="text-[11px] font-bold uppercase tracking-widest text-primary">
               The Problem
             </p>
@@ -228,7 +228,7 @@ export function ServiceDetailClient({ service }: { service: Service | null }) {
       {/* FAQ */}
       {faq.length > 0 && (
         <section className="bg-muted/30">
-          <div className="mx-auto max-w-3xl px-5 py-14 md:py-16">
+          <div className="mx-auto max-w-5xl px-5 py-14 md:py-16">
             <p className="text-[11px] font-bold uppercase tracking-widest text-primary">
               FAQ
             </p>
@@ -295,7 +295,7 @@ export function ServiceDetailClient({ service }: { service: Service | null }) {
               </Link>
               {courseCount > 0 && (
                 <Link
-                  href={`/courses?service=${service.id}`}
+                  href={`/courses?service=${service.slug}`}
                   className="inline-flex items-center gap-1.5 rounded-xl border-2 px-8 py-3 font-semibold transition hover:opacity-80"
                   style={{
                     borderColor: "var(--brand-purple)",

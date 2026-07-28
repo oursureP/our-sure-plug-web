@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 const fallbackServices: Service[] = [
   {
     id: "fb1",
+    slug: "Web-Development",
     name: "Web Development",
     description:
       "Responsive, lightning-fast websites and web apps that turn visitors into loyal customers.",
@@ -33,6 +34,7 @@ const fallbackServices: Service[] = [
   {
     id: "fb2",
     name: "AI Integration",
+    slug: "Integration",
     description:
       "Automate workflows and embed intelligence into your operations.",
     isActive: true,
@@ -43,6 +45,7 @@ const fallbackServices: Service[] = [
   {
     id: "fb3",
     name: "Social Media Management",
+    slug: "Management",
     description:
       "Grow your audience and drive real engagement across every platform.",
     isActive: true,
@@ -53,32 +56,13 @@ const fallbackServices: Service[] = [
   {
     id: "fb4",
     name: "Digital Marketing",
+    slug: "Marketing",
     description:
       "Ads, SEO and strategy that scale your reach and bring measurable results.",
     isActive: true,
     createdAt: "",
     updatedAt: "",
     _count: { courses: 3 },
-  },
-  {
-    id: "fb5",
-    name: "Graphics Design",
-    description:
-      "Brand identity, UI design and motion that make you stand out.",
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-    _count: { courses: 2 },
-  },
-  {
-    id: "fb6",
-    name: "Business Automation",
-    description:
-      "Custom systems and ERP setups that run your operations smoothly.",
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-    _count: { courses: 1 },
   },
 ];
 
@@ -89,16 +73,51 @@ export default async function ServicesPage() {
     data && data.length > 0 ? data.filter((s) => s.isActive) : fallbackServices;
 
   return (
-    <div className="bg-background pt-28 pb-10">
-      <div className="mx-auto max-w-6xl px-5">
-        <div className="w-full">
-          <p className="text-[13px] font-bold uppercase tracking-wider text-primary">
+    <div className="bg-background pb-10">
+      <section className="relative flex min-h-[500px] items-center justify-center overflow-hidden md:min-h-[520px]">
+        <Image
+          src="/images/services-hero.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+        />
+        {/* Overlay — keeps the image visible but text readable */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(67,11,131,0.82) 0%, rgba(67,11,131,0.70) 80%, rgba(67,11,131,0.88) 100%)",
+          }}
+        />
+        <div className="relative z-10 mx-auto max-w-3xl px-5 pt-20 text-center">
+          <p className="text-[13px] font-bold uppercase tracking-wider text-[var(--brand-green)]">
             What we do
           </p>
-          <h1 className="mt-3 text-3xl font-extrabold text-center tracking-tight text-foreground md:text-4xl">
+          <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-white md:text-5xl">
             Services built to grow your brand
           </h1>
-          <p className="mt-4 text-muted-foreground text-center">
+          <p className="mt-5 text-[15px] leading-relaxed text-white/80">
+            In a digital world full of noise, your business needs more than a
+            website — it needs a strategy. We turn ideas into digital
+            experiences that attract customers, build trust, and drive real
+            growth.
+          </p>
+        </div>
+      </section>
+      <div className="mx-auto max-w-6xl px-5 pt-14">
+        <h3 className="font-bold text-primary">Services</h3>
+        {/* <p className="mx-auto max-w-3xl text-center text-muted-foreground">
+          Whether it&apos;s a website built to perform, AI-powered solutions
+          that simplify your operations, marketing that reaches the right
+          people, branding that sticks, or training that upskills your team —
+          we&apos;ve got you covered. We bring together strategy, creativity,
+          and the right technology to deliver results you can measure. And
+          because every business is different, every solution we build is
+          tailored to your goals — so you don&apos;t just stand out, you keep
+          growing in a market that never stops moving.
+        </p> */}
+        {/* <p className="mt-4 text-muted-foreground text-center">
             In a digital world full of noise, your business needs more than a
             website — it needs a strategy. We help businesses turn ideas into
             digital experiences that attract customers, build trust, and drive
@@ -111,8 +130,7 @@ export default async function ServicesPage() {
             solution we build is tailored to your goals — so you don&apos;t just
             stand out, you keep growing in a market that never stops moving.
             Explore our services below to see how we can help you get there.
-          </p>
-        </div>
+          </p> */}
 
         {active.length > 0 ? (
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -161,7 +179,7 @@ function ServiceCard({ service }: { service: Service }) {
   const courseCount = service._count?.courses ?? 0;
   return (
     <Link
-      href={`/services/${service.id}`}
+      href={`/services/${service.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl dark:shadow-none">
       <div className="relative h-44 overflow-hidden bg-muted">
         {service.image ? (
