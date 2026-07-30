@@ -43,10 +43,21 @@ export interface Invoice {
     channel?: string;
   } | null;
   _count?: { items?: number };
+  proofOfPayment?: ProofOfPayment | null;
 }
 export interface RevenueStats {
   totalRevenue: string | number;
   outstanding: string | number;
   paidInvoicesCount: number;
   overdueInvoicesCount: number;
+}
+export interface ProofOfPayment {
+  id: string;
+  fileUrl: string;
+  isVerified: boolean;
+  verifiedAt?: string | null;
+  verifiedBy?: string | null;
+  notes?: string | null;
+  createdAt: string;
+  invoiceId: string;
 }

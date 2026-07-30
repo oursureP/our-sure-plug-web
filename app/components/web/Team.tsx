@@ -33,7 +33,7 @@ const team = [
   {
     name: "Ceejay",
     role: "Head Of Operations",
-    image: "/teams/ceejay.png",
+    image: "/teams/ceejay.jpg",
     socials: [
       {
         icon: Globe,

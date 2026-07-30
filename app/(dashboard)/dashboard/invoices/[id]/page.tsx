@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import {
   ArrowLeft,
@@ -13,9 +14,10 @@ import {
   Ban,
   Building2,
   Mail,
-  //   FileText,
+  FileText,
   ShieldCheck,
-  //   ExternalLink,
+  ExternalLink,
+  Receipt,
 } from "lucide-react";
 import { toast } from "sonner";
 import { AxiosError } from "axios";
@@ -171,7 +173,7 @@ export default function SingleInvoicePage() {
               <Send size={14} /> Send to Client
             </button>
           )}
-          {isBankTransfer &&
+          {/* {isBankTransfer &&
             invoice.status !== "PAID" &&
             invoice.status !== "CANCELLED" && (
               <button
@@ -179,7 +181,22 @@ export default function SingleInvoicePage() {
                 className="flex items-center gap-1.5 rounded-lg bg-green-600 px-4 py-2 text-[13px] font-bold text-white hover:opacity-90">
                 <ShieldCheck size={14} /> Verify Payment
               </button>
-            )}
+            )} */}
+
+          {isBankTransfer &&
+            invoice.status !== "PAID" &&
+            invoice.status !== "CANCELLED" &&
+            (invoice.proofOfPayment ? (
+              <button
+                onClick={() => setConfirmVerify(true)}
+                className="flex items-center gap-1.5 rounded-lg bg-green-600 px-4 py-2 text-[13px] font-bold text-white hover:opacity-90">
+                <ShieldCheck size={14} /> Verify Payment
+              </button>
+            ) : (
+              <span className="rounded-lg border border-dashed border-border px-4 py-2 text-[12.5px] text-muted-foreground">
+                Awaiting client&apos;s proof of payment
+              </span>
+            ))}
           {!isBankTransfer &&
             (invoice.status === "SENT" || invoice.status === "OVERDUE") && (
               <button
@@ -197,6 +214,54 @@ export default function SingleInvoicePage() {
             </button>
           )}
         </div>
+        {/* Proof of payment — bank transfers only */}
+        {isBankTransfer && invoice.proofOfPayment && (
+          <div className="mb-6 rounded-2xl border border-border bg-card p-5 print:hidden">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/13 text-primary">
+                  <Receipt size={17} />
+                </div>
+                <div>
+                  <h3 className="text-[14px] font-bold text-foreground">
+                    Proof of Payment
+                  </h3>
+                  <p className="text-[12px] text-muted-foreground">
+                    Uploaded {fmtDate(invoice.proofOfPayment.createdAt)}
+                  </p>
+                </div>
+              </div>
+              <span
+                className={cn(
+                  "rounded-full px-2.5 py-1 text-[10px] font-bold uppercase",
+                  invoice.proofOfPayment.isVerified
+                    ? "bg-green-500/15 text-green-600 dark:text-green-400"
+                    : "bg-amber-500/15 text-amber-600 dark:text-amber-400",
+                )}>
+                {invoice.proofOfPayment.isVerified
+                  ? "Verified"
+                  : "Awaiting verification"}
+              </span>
+            </div>
+
+            {/* The document itself */}
+            <ProofPreview url={invoice.proofOfPayment.fileUrl} />
+
+            {invoice.proofOfPayment.notes && (
+              <p className="mt-3 rounded-lg bg-muted/40 px-3 py-2 text-[12.5px] text-muted-foreground">
+                <span className="font-semibold text-foreground">Note:</span>{" "}
+                {invoice.proofOfPayment.notes}
+              </p>
+            )}
+
+            {invoice.proofOfPayment.isVerified &&
+              invoice.proofOfPayment.verifiedAt && (
+                <p className="mt-3 text-[12px] text-muted-foreground">
+                  Verified {fmtDate(invoice.proofOfPayment.verifiedAt)}
+                </p>
+              )}
+          </div>
+        )}
       </div>
 
       {/* Invoice document */}
@@ -408,5 +473,48 @@ export default function SingleInvoicePage() {
         />
       )}
     </div>
+  );
+}
+
+function ProofPreview({ url }: { url: string }) {
+  const isPdf = url.toLowerCase().includes(".pdf");
+
+  if (isPdf) {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-between rounded-xl border border-border p-4 transition-colors hover:border-primary/50">
+        <span className="flex items-center gap-3 text-[13.5px] font-semibold text-foreground">
+          <FileText size={18} className="text-primary" /> View payment receipt
+          (PDF)
+        </span>
+        <ExternalLink size={15} className="text-muted-foreground" />
+      </a>
+    );
+  }
+
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block">
+      <div className="relative h-72 w-full overflow-hidden rounded-xl border border-border bg-muted">
+        <Image
+          src={url}
+          alt="Proof of payment"
+          fill
+          className="object-contain"
+          unoptimized
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/30">
+          <span className="rounded-lg bg-background/90 px-3 py-1.5 text-[12px] font-semibold text-foreground opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
+            Open full size
+          </span>
+        </div>
+      </div>
+    </a>
   );
 }

@@ -8,9 +8,9 @@ import { Process } from "../components/web/process";
 import { TrainingHighlight } from "../components/web/training-highlight";
 import { Testimonials } from "../components/web/testimonials";
 import { FAQ } from "../components/web/faq";
-import { BlogPreview } from "../components/web/blog-preview";
+// import { BlogPreview } from "../components/web/blog-preview";
 import { CTABanner } from "../components/web/cta-banner";
-import { BlogPost, Course, Service } from "../interfaces";
+import { Course, Service } from "../interfaces";
 import { serverFetch } from "../lib/api/server";
 
 export const metadata: Metadata = {
@@ -20,10 +20,10 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [services, courses, posts] = await Promise.all([
+  const [services, courses] = await Promise.all([
     serverFetch<Service[]>("/services", { revalidate: 300 }),
     serverFetch<Course[]>("/courses", { revalidate: 300 }),
-    serverFetch<BlogPost[]>("/blog", { revalidate: 300 }),
+    // serverFetch<BlogPost[]>("/blog", { revalidate: 300 }),
   ]);
   return (
     <>
@@ -36,7 +36,7 @@ export default async function HomePage() {
       <TrainingHighlight list={courses ?? undefined} />
       <Testimonials />
       <FAQ />
-      <BlogPreview posts={posts ?? undefined} />
+      {/* <BlogPreview posts={posts ?? undefined} /> */}
       <CTABanner />
     </>
   );
