@@ -8,6 +8,7 @@ import { Sidebar } from "../components/dasboard/sidebar";
 import { cn } from "@/lib/utils";
 import { usersApi } from "../lib/api/users.api";
 import { useAuthStore } from "../stores/auth.store";
+import NextTopLoader from "nextjs-toploader";
 
 export default function DashboardLayout({
   children,
@@ -47,6 +48,11 @@ export default function DashboardLayout({
 
   return (
     <RoleGuard allow={STAFF_ROLES}>
+      <NextTopLoader
+        color="var(--brand-purple)"
+        height={3}
+        showSpinner={true}
+      />
       <div className="min-h-screen bg-background">
         <Sidebar
           open={sidebarOpen}

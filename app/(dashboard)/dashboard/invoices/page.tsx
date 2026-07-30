@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   Plus,
   Search,
@@ -11,6 +12,7 @@ import {
   AlertCircle,
   CheckCircle2,
   Wallet,
+  Repeat,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useInvoices, useRevenueStats } from "@/app/hooks/use-invoices";
@@ -100,11 +102,18 @@ export default function InvoicesPage() {
             Bill clients and track payments.
           </p>
         </div>
-        <button
-          onClick={() => router.push("/dashboard/invoices/new")}
-          className="flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:-translate-y-0.5 hover:opacity-90">
-          <Plus size={17} /> New Invoice
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => router.push("/dashboard/invoices/new")}
+            className="flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:-translate-y-0.5 hover:opacity-90">
+            <Plus size={17} /> New Invoice
+          </button>
+          <Link
+            href="/dashboard/invoices/contracts"
+            className="flex items-center gap-2 rounded-xl border border-border px-4 py-2.5 text-sm font-semibold text-foreground hover:border-primary/50">
+            <Repeat size={16} /> Contracts
+          </Link>
+        </div>
       </div>
 
       {/* Stats */}

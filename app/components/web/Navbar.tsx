@@ -20,7 +20,7 @@ const navMenus: NavMenu[] = [
   { name: "Home", href: "/", exact: true },
   { name: "Services", href: "/services", exact: true },
   { name: "Courses", href: "/courses", hasDropdown: true },
-  { name: "Blog", href: "/blog" },
+  // { name: "Blog", href: "/blog" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];
