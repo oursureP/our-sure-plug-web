@@ -44,7 +44,7 @@ export function CoursesCatalog({
 
   return (
     <div className="bg-background pb-20 lg:pb-28">
-      <section className="relative flex min-h-[500px] items-center justify-center overflow-hidden md:min-h-[520px]">
+      <section className="relative flex min-h-125 items-center justify-center overflow-hidden md:min-h-130">
         <Image
           src="/images/courses-hero.jpeg"
           alt=""
@@ -60,7 +60,7 @@ export function CoursesCatalog({
           }}
         />
         <div className="relative z-10 mx-auto max-w-3xl px-5 pt-20 text-center">
-          <p className="text-[13px] font-bold uppercase tracking-wider text-[var(--brand-green)]">
+          <p className="text-[13px] font-bold uppercase tracking-wider text-(--brand-green)">
             Our courses
           </p>
           <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-white md:text-5xl">
