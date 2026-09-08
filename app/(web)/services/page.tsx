@@ -69,8 +69,8 @@ const fallbackServices: Service[] = [
 export default async function ServicesPage() {
   // Server-side fetch — HTML arrives fully populated for SEO
   const data = await serverFetch<Service[]>("/services", { revalidate: 300 });
-  const active =
-    data && data.length > 0 ? data.filter((s) => s.isActive) : fallbackServices;
+  const active =fallbackServices;
+    // data && data.length > 0 ? data.filter((s) => s.isActive) : fallbackServices;
 
   return (
     <div className="bg-background pb-10">
