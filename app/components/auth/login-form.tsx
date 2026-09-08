@@ -42,16 +42,16 @@ export function LoginForm() {
     setLoading(true);
     try {
       const res = await authApi.login(form.email, form.password);
-      setAuth(res.user, res.token);
-      try {
-        const fullProfile = await usersApi.getProfile();
-        setUser(fullProfile);
-      } catch {
-        console.log("error");
-        setLoading(false);
-      }
-      toast.success("Welcome back!");
-      router.push(getRedirectPath(res.user.role));
+      // setAuth(res.user, res.token);
+      // try {
+      //   const fullProfile = await usersApi.getProfile();
+      //   setUser(fullProfile);
+      // } catch {
+      //   console.log("error");
+      //   setLoading(false);
+      // }
+      // toast.success("Welcome back!");
+      // router.push(getRedirectPath(res.user.role));
     } catch (error) {
       const axiosError = error as AxiosError<{ message?: unknown }>;
       toast.error(resolveMessage(axiosError.response?.data?.message));
