@@ -53,9 +53,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${jakarta.variable} font-sans antialiased`}>
+      <body className={``}>
         <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
+// ${jakarta.variable} font-sans antialiased
