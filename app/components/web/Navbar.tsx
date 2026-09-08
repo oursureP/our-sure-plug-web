@@ -176,7 +176,7 @@ export function Navbar({ categories = [] }: { categories?: Service[] }) {
           <div className="hidden items-center gap-2 lg:flex">
             <ThemeToggle />
             <Link
-              href="/"
+              href="/login"
               className="px-4 py-2 text-[13.5px] font-semibold text-muted-foreground transition-colors hover:text-foreground">
               Login
             </Link>
