@@ -28,7 +28,7 @@ export function Services({ services }: { services?: Service[] }) {
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="gri gap-6 sm:grid-cols- lg:grid-cols-">
           {list.map((service) => {
             const visual = getServiceVisual(service.name);
             const Icon = visual.icon;
