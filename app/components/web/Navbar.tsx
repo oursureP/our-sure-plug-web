@@ -190,12 +190,12 @@ export function Navbar({ categories = [] }: { categories?: Service[] }) {
           {/* Mobile controls */}
           <div className="flex items-center gap-1.5 lg:hidden">
             <ThemeToggle />
-            {/* <button
+             <button
               className="p-2 text-muted-foreground transition-colors hover:text-foreground"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu">
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </button> */}
+            </button> 
           </div>
         </div>
       </div>
